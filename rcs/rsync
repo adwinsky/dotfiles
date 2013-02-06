@@ -1,0 +1,8 @@
+Steam Content
+vendor
+*.log
+.git
+.svn
+.DS_Store
+tmp
+.swp

@@ -1,0 +1,50 @@
+require 'rubygems'
+IRB.conf[:PROMPT_MODE] = :SIMPLE
+begin
+  require 'wirble'
+  Wirble.init
+  Wirble.colorize
+rescue LoadError
+end
+begin
+  # http://github.com/michaeldv/awesome_print
+  # require 'hirb'
+  # require "ap"
+  # IRB::Irb.class_eval do
+  #   def output_value
+  #     ap @context.last_value
+  #   end
+  # end
+rescue LoadError
+end
+begin
+  # require 'hirb'
+  # Hirb.enable
+  # extend Hirb::Console
+rescue LoadError
+end
+def r!; reload!; end
+def pwd; Dir.getwd; end
+def ls; Dir['*']; end
+def la; Dir.entries('.') - ['.', '..']; end
+def cd(directory); Dir.chdir(directory); end
+if defined? ActiveRecord::Base
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+end
+
+class Object
+  def vim(method_name)
+    file, line = method(method_name).source_location
+    `mvim '#{file}' -l #{line}`
+  end
+end
+
+if ENV['RAILS_ENV']
+  # Called after the irb session is initialized and Rails has been loaded
+  IRB.conf[:IRB_RC] = Proc.new do
+    logger = Logger.new(STDOUT)
+    ActiveRecord::Base.logger = logger
+    ActiveResource::Base.logger = logger
+    ActiveRecord::Base.connection.instance_variable_set :@logger, Logger.new(STDOUT)
+  end
+end
