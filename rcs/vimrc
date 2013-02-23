@@ -434,39 +434,15 @@ map zP :setlocal nospell<CR>
 map ze :setlocal spell spelllang=en_us<CR>
 map zE :setlocal nospell<CR>
 
-"Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
 "Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
+vmap <C-j> [egv
+vmap <C-k> ]egv
 
 "Move block of text
 nmap < <<
 nmap > >>
 vmap < <gv
 vmap > >gv
-
-"tabularized - autoformat tables :Tab/|
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
-
-"tabularized mappings
-let mapleader='\'
-nmap <Leader>f= :Tabularize /=<CR>
-vmap <Leader>f= :Tabularize /=<CR>
-nmap <Leader>f: :Tabularize /:\zs<CR>
-vmap <Leader>f: :Tabularize /:\zs<CR>
 
 " => 
 imap <C-l> <Space>=><Space>
@@ -556,7 +532,7 @@ set encoding=utf-8
 nmap <leader>ct :call NERDComment(0, "invert")<cr>
 vmap <leader>ct :call NERDComment(0, "invert")<cr>
 
-noremap <silent> <leader>t :TlistToggle<cr>
+" noremap <silent> <leader>t :TlistToggle<cr> out of work
 noremap <silent> <leader>my :VimShellInteractive mysql -u root<cr>
 noremap <leader>sh :call GoToConqueBash()<cr>
 noremap <leader>rs :call GoToConqueRailsS()<cr>
@@ -622,3 +598,30 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 
 
 set lazyredraw " speeds up macros execution"
+
+" toggling between {} and do - end
+let g:blockle_mapping = '<Leader>bb'
+
+let mapleader='\'
+"
+"tabularized mappings
+nmap <Leader>t= :Tabularize /=<CR>
+vmap <Leader>t= :Tabularize /=<CR>
+nmap <Leader>t: :Tabularize /:\zs<CR>
+vmap <Leader>t: :Tabularize /:\zs<CR>
+nmap <Leader>t\| :Tabularize /\|<CR>
+vmap <Leader>t\| :Tabularize /\|<CR>
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+ 
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+
