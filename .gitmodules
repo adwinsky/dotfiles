@@ -148,3 +148,27 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "vim/bundle/vim-bufexplorer"]
+	path = vim/bundle/vim-bufexplorer
+	url = https://github.com/slack/vim-bufexplorer
+[submodule "vim/bundle/camelcasemotion"]
+	path = vim/bundle/camelcasemotion
+	url = https://github.com/bkad/CamelCaseMotion
+[submodule "vim/bundle/vim-html5"]
+	path = vim/bundle/vim-html5
+	url = git://github.com/othree/html5.vim.git
+[submodule "vim/bundle/vim-matchit"]
+	path = vim/bundle/vim-matchit
+	url = git://github.com/tsaleh/vim-matchit.git
+[submodule "vim/bundle/vim-mustache"]
+	path = vim/bundle/vim-mustache
+	url = git://github.com/juvenn/mustache.vim.git
+[submodule "vim/bundle/vim-notes"]
+	path = vim/bundle/vim-notes
+	url = git://github.com/xolox/vim-notes.git
+[submodule "vim/bundle/vim-renumber"]
+	path = vim/bundle/vim-renumber
+	url = git://github.com/vim-scripts/renumber.vim.git
+[submodule "vim/bundle/vim-yankring"]
+	path = vim/bundle/vim-yankring
+	url = git://github.com/vim-scripts/YankRing.vim.git
