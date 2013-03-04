@@ -435,8 +435,8 @@ map ze :setlocal spell spelllang=en_us<CR>
 map zE :setlocal nospell<CR>
 
 "Bubble multiple lines
-vmap <C-j> [egv
-vmap <C-k> ]egv
+vmap <C-k> [egv
+vmap <C-j> ]egv
 
 "Move block of text
 nmap < <<
